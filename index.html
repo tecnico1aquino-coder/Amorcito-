@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Brisa ❤️</title>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  height: 100vh;
+  background: linear-gradient(to top, #ff758c, #ff7eb3);
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.sun {
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255,255,255,0.45), transparent);
+  animation: spin 25s linear infinite;
+}
+
+h1 {
+  margin-top: 25px;
+  font-size: 2.3rem;
+}
+
+#typing {
+  margin: 18px auto;
+  font-size: 1.2rem;
+  width: 85%;
+  min-height: 70px;
+}
+
+#tree {
+  font-size: 42px;
+  margin-top: 15px;
+  animation: float 6s ease-in-out infinite;
+}
+
+#contador {
+  margin-top: 15px;
+  font-size: 1.05rem;
+}
+
+.photos img {
+  width: 85px;
+  height: 85px;
+  border-radius: 18px;
+  margin: 6px;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.6);
+}
+
+button {
+  margin-top: 18px;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.15rem;
+  background: #ff2e63;
+  color: white;
+}
+
+.heart {
+  position: absolute;
+  bottom: -40px;
+  font-size: 22px;
+  animation: rise 7s linear infinite;
+}
+
+@keyframes rise {
+  from { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="sun"></div>
+
+<h1>Para Brisa ❤️</h1>
+
+<div id="typing"></div>
+
+<div id="tree">
+  ❤️❤️❤️❤️❤️<br>
+  ❤️❤️❤️❤️❤️<br>
+  ❤️❤️❤️❤️❤️<br>
+  &nbsp;&nbsp;🌳
+</div>
+
+<div id="contador"></div>
+
+<div class="photos">
+  <img src="foto1.jpg">
+  <img src="foto2.jpg">
+</div>
+
+<button onclick="alert('Entonces que sea para siempre 💕')">
+  ¿Querés ser mi San Valentín?
+</button>
+
+<audio autoplay loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// TEXTO PERSONALIZADO
+const texto = "amor, desde el 10 de diciembre mi mundo cambió. No porque todo sea perfecto, sino porque es real, es con vos y eso lo hace único 💕";
+let i = 0;
+
+function escribir() {
+  if (i < texto.length) {
+    document.getElementById("typing").innerHTML += texto.charAt(i);
+    i++;
+    setTimeout(escribir, 75);
+  }
+}
+escribir();
+
+// CONTADOR DESDE EL 10/12/2024
+const inicio = new Date("2024-12-10T00:00:00");
+
+setInterval(() => {
+  const ahora = new Date();
+  const diff = ahora - inicio;
+
+  const dias = Math.floor(diff / (1000*60*60*24));
+  const horas = Math.floor((diff / (1000*60*60)) % 24);
+  const minutos = Math.floor((diff / (1000*60)) % 60);
+
+  document.getElementById("contador").innerHTML =
+    `Estamos juntos hace ${dias} días, ${horas} horas y ${minutos} minutos ❤️`;
+}, 1000);
+
+// CORAZONES FLOTANDO
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "❤️";
+  h.style.left = Math.random()*100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+}, 350);
+</script>
+
+</body>
+</html>
