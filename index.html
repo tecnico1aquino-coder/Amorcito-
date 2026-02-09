@@ -11,7 +11,7 @@ body {
   height: 100vh;
   background: linear-gradient(to top, #ff758c, #ff7eb3);
   overflow: hidden;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   color: white;
   text-align: center;
 }
@@ -27,31 +27,31 @@ body {
 }
 
 h1 {
-  margin-top: 25px;
-  font-size: 2.3rem;
+  margin-top: 22px;
+  font-size: 2.4rem;
 }
 
 #typing {
   margin: 18px auto;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   width: 85%;
-  min-height: 70px;
+  min-height: 80px;
 }
 
 #tree {
-  font-size: 42px;
-  margin-top: 15px;
+  font-size: 44px;
+  margin-top: 10px;
   animation: float 6s ease-in-out infinite;
 }
 
 #contador {
-  margin-top: 15px;
-  font-size: 1.05rem;
+  margin-top: 12px;
+  font-size: 1.1rem;
 }
 
 .photos img {
-  width: 85px;
-  height: 85px;
+  width: 90px;
+  height: 90px;
   border-radius: 18px;
   margin: 6px;
   object-fit: cover;
@@ -60,12 +60,13 @@ h1 {
 
 button {
   margin-top: 18px;
-  padding: 14px 26px;
+  padding: 14px 28px;
   border: none;
   border-radius: 30px;
   font-size: 1.15rem;
   background: #ff2e63;
   color: white;
+  cursor: pointer;
 }
 
 .heart {
@@ -101,12 +102,7 @@ button {
 
 <div id="typing"></div>
 
-<div id="tree">
-  ❤️❤️❤️❤️❤️<br>
-  ❤️❤️❤️❤️❤️<br>
-  ❤️❤️❤️❤️❤️<br>
-  &nbsp;&nbsp;🌳
-</div>
+<div id="tree">🌳</div>
 
 <div id="contador"></div>
 
@@ -115,52 +111,63 @@ button {
   <img src="foto2.jpg">
 </div>
 
-<button onclick="alert('Entonces que sea para siempre 💕')">
-  ¿Querés ser mi San Valentín?
-</button>
-
-<audio autoplay loop>
+<audio id="musica" loop>
   <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
+<button id="playBtn">▶️ Reproducir nuestra canción</button>
+
 <script>
-// TEXTO PERSONALIZADO
-const texto = "amor, desde el 10 de diciembre mi mundo cambió. No porque todo sea perfecto, sino porque es real, es con vos y eso lo hace único 💕";
+// 🎵 Música
+const musica = document.getElementById("musica");
+const btn = document.getElementById("playBtn");
+
+btn.onclick = () => {
+  musica.play();
+  btn.style.display = "none";
+};
+
+// ⌨️ Texto escribiéndose
+const texto = "Desde el 10 de diciembre, mi mundo es más lindo porque estás vos. Gracias por ser mi hogar, mi calma y mi amor.";
 let i = 0;
+const typing = document.getElementById("typing");
 
 function escribir() {
   if (i < texto.length) {
-    document.getElementById("typing").innerHTML += texto.charAt(i);
+    typing.innerHTML += texto.charAt(i);
     i++;
-    setTimeout(escribir, 75);
+    setTimeout(escribir, 45);
   }
 }
 escribir();
 
-// CONTADOR DESDE EL 10/12/2024
-const inicio = new Date("2024-12-10T00:00:00");
+// ⏳ Contador real
+const inicio = new Date("2024-12-10");
 
-setInterval(() => {
+function actualizarContador() {
   const ahora = new Date();
   const diff = ahora - inicio;
 
-  const dias = Math.floor(diff / (1000*60*60*24));
-  const horas = Math.floor((diff / (1000*60*60)) % 24);
-  const minutos = Math.floor((diff / (1000*60)) % 60);
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutos = Math.floor((diff / (1000 * 60)) % 60);
 
-  document.getElementById("contador").innerHTML =
-    `Estamos juntos hace ${dias} días, ${horas} horas y ${minutos} minutos ❤️`;
-}, 1000);
+  document.getElementById("contador").innerText =
+    `Juntos hace ${dias} días, ${horas} horas y ${minutos} minutos ❤️`;
+}
+setInterval(actualizarContador, 1000);
+actualizarContador();
 
-// CORAZONES FLOTANDO
+// ❤️ Lluvia de corazones
 setInterval(() => {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = "❤️";
-  h.style.left = Math.random()*100 + "vw";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
-}, 350);
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = 18 + Math.random() * 18 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}, 500);
 </script>
 
 </body>
